@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Watch Series Online</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-900 text-white">
+    <!-- Navigation Bar -->
+    <nav class="bg-red-600 p-4 text-center">
+        <h1 class="text-white text-2xl font-bold">Online Series Stream</h1>
+    </nav>
+
+    <!-- Series Listing Section -->
+    <section class="py-8">
+        <div class="container mx-auto px-4">
+            <h2 class="text-xl font-bold mb-4">Popular Series</h2>
+            <div id="seriesContainer" class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <!-- Series will be loaded dynamically -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Video Player Section -->
+    <section class="py-8 flex flex-col items-center">
+        <div class="bg-gray-800 p-6 rounded-lg shadow-lg w-full max-w-2xl">
+            <h2 class="text-lg font-bold mb-2">Now Playing:</h2>
+            <video id="videoPlayer" class="w-full rounded-lg" controls>
+                <source id="videoSource" src="" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </div>
+    </section>
+
+    <script>
+        const seriesList = [
+            { name: "Breaking Bad", video: "https://www.w3schools.com/html/mov_bbb.mp4", image: "https://via.placeholder.com/150" },
+            { name: "Stranger Things", video: "https://www.w3schools.com/html/movie.mp4", image: "https://via.placeholder.com/150" },
+            { name: "Game of Thrones", video: "https://www.w3schools.com/html/mov_bbb.mp4", image: "https://via.placeholder.com/150" }
+        ];
+
+        const seriesContainer = document.getElementById("seriesContainer");
+        const videoPlayer = document.getElementById("videoPlayer");
+        const videoSource = document.getElementById("videoSource");
+
+        seriesList.forEach(series => {
+            const seriesCard = document.createElement("div");
+            seriesCard.classList.add("bg-white", "text-black", "p-4", "rounded-lg", "shadow-lg", "text-center");
+            seriesCard.innerHTML = `
+                <img src="${series.image}" alt="${series.name}" class="w-full h-40 object-cover rounded">
+                <h3 class="text-lg font-bold mt-2">${series.name}</h3>
+                <button class="bg-red-500 text-white px-4 py-2 rounded mt-2 hover:bg-red-700" onclick="playSeries('${series.video}')">Watch Now</button>
+            `;
+            seriesContainer.appendChild(seriesCard);
+        });
+
+        function playSeries(videoUrl) {
+            videoSource.src = videoUrl;
+            videoPlayer.load();
+            videoPlayer.play();
+        }
+    </script>
+
+    <!-- Footer -->
+    <footer class="bg-red-600 text-center py-4 text-white mt-8">
+        <p>&copy; 2025 Online Series Stream. All rights reserved.</p>
+    </footer>
+</body>
+</html>
